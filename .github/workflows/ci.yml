@@ -1,0 +1,35 @@
+name: CI Checks # Name of the workflow displayed on GitHub Actions tab
+
+on: # Events that trigger the workflow
+  push:
+    branches: [ "main" ] # Run on pushes to the main branch
+  pull_request:
+    branches: [ "main" ] # Run on pull requests targeting the main branch
+
+jobs: # Define the jobs to run
+  build_and_test: # Name of the job
+    runs-on: ubuntu-latest # Specify the runner environment
+
+    steps: # Sequence of tasks to perform
+      - name: Checkout code
+        uses: actions/checkout@v4 # Use latest major version
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v3 # Use latest major version
+        with:
+          version: latest # Or specify a pnpm version
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4 # Use latest major version
+        with:
+          node-version: '20' # Match your project's Node version
+          cache: 'pnpm' # Enable caching for pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile # Use --frozen-lockfile for CI
+
+      - name: Run Linter and Formatter Checks
+        run: pnpm check # Runs biome check --apply (as per package.json)
+
+      - name: Run tests
+        run: pnpm test # Runs vitest run (as per package.json) 
