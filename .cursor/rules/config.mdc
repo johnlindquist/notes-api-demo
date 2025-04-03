@@ -3,4 +3,11 @@ description:
 globs: 
 alwaysApply: true
 ---
-Always use pnpm
+
+**Project Configuration & Tooling Overview:**
+
+*   **Package Management:** Uses `pnpm`. See `package.json` and `pnpm-lock.yaml`.
+*   **Build Tool:** Uses Vite (`vite.config.ts`).
+*   **Language:** TypeScript (`tsconfig.json`).
+*   **Deployment:** Cloudflare Workers (`wrangler.jsonc`).
+*   **Version Control:** Git (`.gitignore`).
