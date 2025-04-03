@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+GitHub Actions CI Setup/Verify: Create `.github/workflows/ci.yml`, define triggers (e.g., `on: push/pull_request: branches: [main]`). Commit/push: `git add .github/workflows/ci.yml`, `git commit ...`, `git push ...`. Trigger with PR: `gh pr create --base main --fill`. Monitoring: Avoid `gh run watch [| cat]` (needs ID non-interactively). Get ID `gh run list --limit 1 --json databaseId -q '.[0].databaseId' | cat`, then watch `gh run watch <RUN_ID> --exit-status | cat`. Troubleshooting `ERR_PNPM_OUTDATED_LOCKFILE` (lockfile mismatch): Run `pnpm install`, then `git add pnpm-lock.yaml`, `git commit -m "fix: update pnpm lockfile"`, `git push`. View logs: `gh run view <RUN_ID> --log | cat`.
